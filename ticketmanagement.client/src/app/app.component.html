@@ -1,0 +1,144 @@
+
+<ejs-grid
+  #grid
+  width="100%"
+  height="400"
+  [dataSource]="dataManager"
+  [allowSorting]="true"
+  [allowFiltering]="true"
+  [enableVirtualization]="true"
+  [toolbar]="toolbar"
+  [editSettings]="editSettings"
+  [filterSettings]="filterSettings"
+>
+  <e-columns>
+    <e-column
+      field="TicketId"
+      isPrimaryKey="true"
+      [showInColumnChooser]="false"
+      [showColumnMenu]="false"
+      [visible]="true">
+    </e-column>
+
+    <e-column
+      field="PublicTicketId"
+      headerText="Ticket ID"
+      width="130"
+      textAlign="Right"
+      [allowEditing]="false">
+      <ng-template #template let-data>
+        <a class="status-text status-ticket-id">
+          {{ data.PublicTicketId }}
+        </a>
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="Title"
+      headerText="Subject"
+      width="280"
+      clipMode="EllipsisWithTooltip">
+    </e-column>
+
+    <e-column
+      field="Status"
+      headerText="Status"
+      width="180"
+      editType="dropdownedit">
+      <ng-template #template let-data>
+        <span
+          class="status-text {{ getStatusClass(data) }}"
+          [title]="getStatusDescription(data)">
+          {{ data.Status }}
+        </span>
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="Priority"
+      headerText="Priority"
+      width="160"
+      editType="dropdownedit">
+      <ng-template #template let-data>
+        <span
+          class="priority-pill {{ getPriorityClass(data) }}"
+          [title]="getPriorityDescription(data)">
+          <span class="priority-icon" aria-hidden="true"></span>
+          {{ data.Priority }}
+        </span>
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="Category"
+      headerText="Category"
+      width="180"
+      editType="dropdownedit">
+      <ng-template #template let-data>
+        <span class="chip {{ getCategoryClass(data) }}">
+          {{ data.Category }}
+        </span>
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="Department"
+      headerText="Department"
+      width="170"
+      editType="dropdownedit">
+    </e-column>
+
+    <e-column
+      field="CreatedBy"
+      headerText="Requested By"
+      width="180"
+      editType="dropdownedit">
+    </e-column>
+
+    <e-column
+      field="Assignee"
+      headerText="Agent"
+      width="160"
+      editType="dropdownedit">
+    </e-column>
+
+    <e-column
+      field="DueDate"
+      headerText="Resolution Due"
+      width="200"
+      type="dateTime"
+      format="MMM d, yyyy, h:mm a"
+      editType="datetimepickeredit">
+    </e-column>
+
+    <e-column
+      field="ResponseDue"
+      headerText="Response Due"
+      width="200"
+      editType="datetimepickeredit">
+      <ng-template #template let-data>
+        <span class="response-due">
+          {{ data.ResponseDue ? (data.ResponseDue | date:'MMM d, yyyy, h:mm a') : '' }}
+        </span>
+      </ng-template>
+    </e-column>
+
+    <e-column
+      field="UpdatedAt"
+      headerText="Last Modified"
+      width="200"
+      type="dateTime"
+      format="MMM d, yyyy, h:mm a"
+      editType="datetimepickeredit">
+    </e-column>
+
+    <e-column
+      field="CreatedAt"
+      headerText="Created On"
+      width="200"
+      type="dateTime"
+      format="MMM d, yyyy, h:mm a"
+      editType="datetimepickeredit">
+    </e-column>
+  </e-columns>
+</ejs-grid>
